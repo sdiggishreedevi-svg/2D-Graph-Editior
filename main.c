@@ -34,6 +34,14 @@ void addVertex(int row, int col)
         canvas[row][col] = 'O';
     }
 }
+void addEdge(int row1, int col1, int row2, int col2)
+{
+    if(row1 == row2)
+    {
+        for(int i = col1; i <= col2; i++)
+            canvas[row1][i] = '-';
+    }
+}
 
 
 int main()
@@ -49,6 +57,7 @@ int main()
     scanf("%d", &col);
 
     addVertex(row, col);
+    addEdge(5,10,5,20);
 
     displayCanvas();
 
