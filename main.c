@@ -27,10 +27,29 @@ void displayCanvas()
         printf("\n");
     }
 }
+void addVertex(int row, int col)
+{
+    if(row >= 0 && row < ROWS && col >= 0 && col < COLS)
+    {
+        canvas[row][col] = 'O';
+    }
+}
+
 
 int main()
 {
+    int row, col;
+
     clearCanvas();
+
+    printf("Enter row (0-19): ");
+    scanf("%d", &row);
+
+    printf("Enter column (0-39): ");
+    scanf("%d", &col);
+
+    addVertex(row, col);
+
     displayCanvas();
 
     return 0;
