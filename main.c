@@ -42,6 +42,13 @@ void addEdge(int row1, int col1, int row2, int col2)
             canvas[row1][i] = '-';
     }
 }
+void addEdgeHorizontal(int row, int col1, int col2)
+{
+    for(int i = col1; i <= col2; i++)
+    {
+        canvas[row][i] = '-';
+    }
+}
 
 
 int main()
@@ -58,6 +65,10 @@ int main()
 
     addVertex(row, col);
     addEdge(5,10,5,20);
+    addVertex(5, 10);
+addVertex(5, 20);
+addEdgeHorizontal(5, 10, 20);
+
 
     displayCanvas();
 
