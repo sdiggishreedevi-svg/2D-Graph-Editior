@@ -50,27 +50,45 @@ void addEdgeHorizontal(int row, int col1, int col2)
     }
 }
 
-
 int main()
 {
-    int row, col;
+    int choice;
 
     clearCanvas();
 
-    printf("Enter row (0-19): ");
-    scanf("%d", &row);
+    while(1)
+    {
+        printf("\n--- 2D GRAPH EDITOR ---\n");
+        printf("1. Add Vertex\n");
+        printf("2. Display Graph\n");
+        printf("3. Exit\n");
 
-    printf("Enter column (0-39): ");
-    scanf("%d", &col);
+        printf("Enter Choice: ");
+        scanf("%d",&choice);
 
-    addVertex(row, col);
-    addEdge(5,10,5,20);
-    addVertex(5, 10);
-addVertex(5, 20);
-addEdgeHorizontal(5, 10, 20);
+        if(choice == 1)
+        {
+            int row,col;
 
+            printf("Enter Row: ");
+            scanf("%d",&row);
 
-    displayCanvas();
+            printf("Enter Column: ");
+            scanf("%d",&col);
+
+            addVertex(row,col);
+        }
+
+        else if(choice == 2)
+        {
+            displayCanvas();
+        }
+
+        else if(choice == 3)
+        {
+            break;
+        }
+    }
 
     return 0;
 }
