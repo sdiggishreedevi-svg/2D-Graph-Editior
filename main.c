@@ -58,10 +58,11 @@ int main()
 
     while(1)
     {
-        printf("\n--- 2D GRAPH EDITOR ---\n");
-        printf("1. Add Vertex\n");
-        printf("2. Display Graph\n");
-        printf("3. Exit\n");
+       printf("\n--- 2D GRAPH EDITOR ---\n");
+printf("1. Add Vertex\n");
+printf("2. Add Horizontal Edge\n");
+printf("3. Display Graph\n");
+printf("4. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d",&choice);
@@ -78,16 +79,32 @@ int main()
 
             addVertex(row,col);
         }
+    else if(choice == 2)
+{
+    int row,col1,col2;
 
-        else if(choice == 2)
-        {
-            displayCanvas();
-        }
+    printf("Enter Row: ");
+    scanf("%d",&row);
 
-        else if(choice == 3)
-        {
-            break;
-        }
+    printf("Enter Start Column: ");
+    scanf("%d",&col1);
+
+    printf("Enter End Column: ");
+    scanf("%d",&col2);
+
+    addEdge(row,col1,row,col2);
+}
+
+else if(choice == 3)
+{
+    displayCanvas();
+}
+
+else if(choice == 4)
+{
+    break;
+}
+       
     }
 
     return 0;
