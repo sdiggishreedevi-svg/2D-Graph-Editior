@@ -67,18 +67,26 @@ printf("4. Exit\n");
         printf("Enter Choice: ");
         scanf("%d",&choice);
 
-        if(choice == 1)
-        {
-            int row,col;
+       if(choice == 1)
+{
+    int n;
 
-            printf("Enter Row: ");
-            scanf("%d",&row);
+    printf("Number of Vertices: ");
+    scanf("%d",&n);
 
-            printf("Enter Column: ");
-            scanf("%d",&col);
+    for(int i = 0; i < n; i++)
+    {
+        int row,col;
 
-            addVertex(row,col);
-        }
+        printf("Vertex %d Row: ", i + 1);
+        scanf("%d",&row);
+
+        printf("Vertex %d Column: ", i + 1);
+        scanf("%d",&col);
+
+        addVertex(row,col);
+    }
+} 
     else if(choice == 2)
 {
     int row,col1,col2;
