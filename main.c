@@ -57,6 +57,16 @@ void addVerticalEdge(int col, int row1, int row2)
     }
 }
 
+void drawRectangle(int row1, int col1, int row2, int col2)
+{
+    addEdgeHorizontal(row1, col1, col2);
+
+    addEdgeHorizontal(row2, col1, col2);
+
+    addVerticalEdge(col1, row1, row2);
+
+    addVerticalEdge(col2, row1, row2);
+}
 int main()
 {
     int choice;
@@ -69,8 +79,9 @@ int main()
 printf("1. Add Vertex\n");
 printf("2. Add Horizontal Edge\n");
 printf("3. Add Vertical Edge\n");
+printf("5. Draw Rectangle\n");
 printf("4. Display Graph\n");
-printf("5. Exit\n");
+printf("6. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d",&choice);
@@ -129,10 +140,29 @@ else if(choice == 3)
 
 else if(choice == 4)
 {
-    displayCanvas();
+    int row1,col1,row2,col2;
+
+    printf("Enter Top Row: ");
+    scanf("%d",&row1);
+
+    printf("Enter Left Column: ");
+    scanf("%d",&col1);
+
+    printf("Enter Bottom Row: ");
+    scanf("%d",&row2);
+
+    printf("Enter Right Column: ");
+    scanf("%d",&col2);
+
+    drawRectangle(row1,col1,row2,col2);
 }
 
 else if(choice == 5)
+{
+    displayCanvas();
+}
+
+else if(choice == 6)
 {
     break;
 }
