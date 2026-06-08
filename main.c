@@ -49,6 +49,13 @@ void addEdgeHorizontal(int row, int col1, int col2)
         canvas[row][i] = '-';
     }
 }
+void addVerticalEdge(int col, int row1, int row2)
+{
+    for(int i = row1; i <= row2; i++)
+    {
+        canvas[i][col] = '|';
+    }
+}
 
 int main()
 {
@@ -61,8 +68,9 @@ int main()
        printf("\n--- 2D GRAPH EDITOR ---\n");
 printf("1. Add Vertex\n");
 printf("2. Add Horizontal Edge\n");
-printf("3. Display Graph\n");
-printf("4. Exit\n");
+printf("3. Add Vertical Edge\n");
+printf("4. Display Graph\n");
+printf("5. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d",&choice);
@@ -105,10 +113,26 @@ printf("4. Exit\n");
 
 else if(choice == 3)
 {
-    displayCanvas();
+    int col,row1,row2;
+
+    printf("Enter Column: ");
+    scanf("%d",&col);
+
+    printf("Enter Start Row: ");
+    scanf("%d",&row1);
+
+    printf("Enter End Row: ");
+    scanf("%d",&row2);
+
+    addVerticalEdge(col,row1,row2);
 }
 
 else if(choice == 4)
+{
+    displayCanvas();
+}
+
+else if(choice == 5)
 {
     break;
 }
