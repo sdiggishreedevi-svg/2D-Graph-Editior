@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include<stdlib.h>
+#include<math.h>
 
 #define ROWS 20
 #define COLS 40
@@ -56,6 +58,31 @@ void addVerticalEdge(int col, int row1, int row2)
         canvas[i][col] = '|';
     }
 }
+void drawLine(int row1, int col1, int row2, int col2)
+{
+    int dx = col2 - col1;
+    int dy = row2 - row1;
+
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    float xInc = dx / (float)steps;
+    float yInc = dy / (float)steps;
+
+    float x = col1;
+    float y = row1;
+
+    for(int i = 0; i <= steps; i++)
+    {
+        if((int)y >= 0 && (int)y < ROWS &&
+           (int)x >= 0 && (int)x < COLS)
+        {
+            canvas[(int)y][(int)x] = '*';
+        }
+
+        x += xInc;
+        y += yInc;
+    }
+}
 
 void drawRectangle(int row1, int col1, int row2, int col2)
 {
@@ -67,6 +94,33 @@ void drawRectangle(int row1, int col1, int row2, int col2)
 
     addVerticalEdge(col2, row1, row2);
 }
+void drawTriangle(int row1, int col1,
+                  int row2, int col2,
+                  int row3, int col3)
+{
+    drawLine(row1, col1, row2, col2);
+
+    drawLine(row2, col2, row3, col3);
+
+    drawLine(row3, col3, row1, col1);
+}
+void drawCircle(int centerRow, int centerCol, int radius)
+{
+    for(int angle = 0; angle < 360; angle++)
+    {
+        double rad = angle * 3.14159 / 180.0;
+
+        int row = centerRow + (int)(radius * sin(rad));
+        int col = centerCol + (int)(radius * cos(rad));
+
+        if(row >= 0 && row < ROWS &&
+           col >= 0 && col < COLS)
+        {
+            canvas[row][col] = '*';
+        }
+    }
+}
+
 int main()
 {
     int choice;
@@ -79,9 +133,11 @@ int main()
 printf("1. Add Vertex\n");
 printf("2. Add Horizontal Edge\n");
 printf("3. Add Vertical Edge\n");
-printf("5. Draw Rectangle\n");
-printf("4. Display Graph\n");
-printf("6. Exit\n");
+printf("4. Draw Rectangle\n");
+printf("5. Draw Triangle\n");
+printf("6. Draw Circle\n");
+printf("7. Display Graph\n");
+printf("8. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d",&choice);
@@ -159,10 +215,42 @@ else if(choice == 4)
 
 else if(choice == 5)
 {
-    displayCanvas();
+    int row1,col1,row2,col2,row3,col3;
+
+    printf("Enter Row1 Column1: ");
+    scanf("%d %d",&row1,&col1);
+
+    printf("Enter Row2 Column2: ");
+    scanf("%d %d",&row2,&col2);
+
+    printf("Enter Row3 Column3: ");
+    scanf("%d %d",&row3,&col3);
+
+    drawTriangle(row1,col1,row2,col2,row3,col3);
 }
 
 else if(choice == 6)
+{
+    int row,col,radius;
+
+    printf("Enter Center Row: ");
+    scanf("%d",&row);
+
+    printf("Enter Center Column: ");
+    scanf("%d",&col);
+
+    printf("Enter Radius: ");
+    scanf("%d",&radius);
+
+    drawCircle(row,col,radius);
+}
+
+else if(choice == 7)
+{
+    displayCanvas();
+}
+
+else if(choice == 8)
 {
     break;
 }
