@@ -120,6 +120,21 @@ void drawCircle(int centerRow, int centerCol, int radius)
         }
     }
 }
+void deleteObject(int row, int col)
+{
+    if(row >= 0 && row < ROWS &&
+       col >= 0 && col < COLS)
+    {
+        canvas[row][col] = '_';
+    }
+}
+void modifyObject(int oldRow, int oldCol,
+                  int newRow, int newCol)
+{
+    deleteObject(oldRow, oldCol);
+
+    addVertex(newRow, newCol);
+}
 
 int main()
 {
@@ -136,8 +151,10 @@ printf("3. Add Vertical Edge\n");
 printf("4. Draw Rectangle\n");
 printf("5. Draw Triangle\n");
 printf("6. Draw Circle\n");
-printf("7. Display Graph\n");
-printf("8. Exit\n");
+printf("7. Delete Object\n");
+printf("8. Modify Object\n");
+printf("9. Display Graph\n");
+printf("10. Exit\n");
 
         printf("Enter Choice: ");
         scanf("%d",&choice);
@@ -247,10 +264,35 @@ else if(choice == 6)
 
 else if(choice == 7)
 {
-    displayCanvas();
+    int row,col;
+
+    printf("Enter Row: ");
+    scanf("%d",&row);
+
+    printf("Enter Column: ");
+    scanf("%d",&col);
+
+    deleteObject(row,col);
 }
 
 else if(choice == 8)
+{
+     int oldRow,oldCol,newRow,newCol;
+
+    printf("Enter Old Row and Column: ");
+    scanf("%d %d",&oldRow,&oldCol);
+
+    printf("Enter New Row and Column: ");
+    scanf("%d %d",&newRow,&newCol);
+
+    modifyObject(oldRow,oldCol,newRow,newCol);
+}
+else if(choice == 9)
+{
+    displayCanvas();
+}
+
+else if(choice == 10)
 {
     break;
 }
