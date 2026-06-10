@@ -1,1 +1,255 @@
+PROMPT 1:
+I have a mini project of 2D graph editor where we need to push code in GitHub daily. What should I do next?
+
+RESPONSE:
+Create a GitHub repository. Start with a 2D array canvas and implement clearCanvas() and displayCanvas().
+
+Code:
+
+```c
+void clearCanvas()
+{
+    for(int i = 0; i < ROWS; i++)
+    {
+        for(int j = 0; j < COLS; j++)
+        {
+            canvas[i][j] = '_';
+        }
+    }
+}
+
+void displayCanvas()
+{
+    for(int i = 0; i < ROWS; i++)
+    {
+        for(int j = 0; j < COLS; j++)
+        {
+            printf("%c", canvas[i][j]);
+        }
+        printf("\n");
+    }
+}
+```
+
+Run Command:
+
+gcc main.c -o main.exe
+.\main.exe
+
+Commit Message:
+
+Initialized canvas and display functions
+
+---
+
+PROMPT 2:
+Give me today's code.
+
+RESPONSE:
+Implement vertex insertion.
+
+Code:
+
+```c
+void addVertex(int row, int col)
+{
+    if(row >= 0 && row < ROWS && col >= 0 && col < COLS)
+    {
+        canvas[row][col] = 'O';
+    }
+}
+```
+
+Commit Message:
+
+Implemented vertex insertion functionality
+
+---
+
+PROMPT 3:
+Give me code for horizontal edge.
+
+RESPONSE:
+
+```c
+void addEdgeHorizontal(int row, int col1, int col2)
+{
+    for(int i = col1; i <= col2; i++)
+    {
+        canvas[row][i] = '-';
+    }
+}
+```
+
+Commit Message:
+
+Implemented horizontal edge drawing
+
+---
+
+PROMPT 4:
+What to add and where to add?
+
+RESPONSE:
+
+```c
+void addVerticalEdge(int col, int row1, int row2)
+{
+    for(int i = row1; i <= row2; i++)
+    {
+        canvas[i][col] = '|';
+    }
+}
+```
+
+Commit Message:
+
+Implemented vertical edge drawing
+
+---
+
+PROMPT 5:
+Give me code for rectangle.
+
+RESPONSE:
+
+```c
+void drawRectangle(int row1, int col1, int row2, int col2)
+{
+    addEdgeHorizontal(row1, col1, col2);
+    addEdgeHorizontal(row2, col1, col2);
+    addVerticalEdge(col1, row1, row2);
+    addVerticalEdge(col2, row1, row2);
+}
+```
+
+Commit Message:
+
+Implemented rectangle drawing functionality
+
+---
+
+PROMPT 6:
+Give me today's part.
+
+RESPONSE:
+
+```c
+void drawLine(int row1, int col1, int row2, int col2)
+{
+    int dx = col2 - col1;
+    int dy = row2 - row1;
+
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+    float xInc = dx / (float)steps;
+    float yInc = dy / (float)steps;
+
+    float x = col1;
+    float y = row1;
+
+    for(int i = 0; i <= steps; i++)
+    {
+        canvas[(int)y][(int)x] = '*';
+        x += xInc;
+        y += yInc;
+    }
+}
+
+void drawTriangle(int row1, int col1,
+                  int row2, int col2,
+                  int row3, int col3)
+{
+    drawLine(row1, col1, row2, col2);
+    drawLine(row2, col2, row3, col3);
+    drawLine(row3, col3, row1, col1);
+}
+```
+
+Commit Message:
+
+Implemented triangle drawing using line algorithm
+
+---
+
+PROMPT 7:
+Give me circle today only.
+
+RESPONSE:
+
+```c
+void drawCircle(int centerRow, int centerCol, int radius)
+{
+    for(int angle = 0; angle < 360; angle++)
+    {
+        double rad = angle * 3.14159 / 180.0;
+
+        int row = centerRow + (int)(radius * sin(rad));
+        int col = centerCol + (int)(radius * cos(rad));
+
+        if(row >= 0 && row < ROWS &&
+           col >= 0 && col < COLS)
+        {
+            canvas[row][col] = '*';
+        }
+    }
+}
+```
+
+Commit Message:
+
+Implemented triangle and circle drawing functionality
+
+---
+
+PROMPT 8:
+Give me last part.
+
+RESPONSE:
+
+```c
+void deleteObject(int row, int col)
+{
+    if(row >= 0 && row < ROWS &&
+       col >= 0 && col < COLS)
+    {
+        canvas[row][col] = '_';
+    }
+}
+
+void modifyObject(int oldRow, int oldCol,
+                  int newRow, int newCol)
+{
+    deleteObject(oldRow, oldCol);
+    addVertex(newRow, newCol);
+}
+```
+
+Commit Message:
+
+Implemented object deletion and modification features
+
+---
+
+PROMPT 9:
+Commit
+
+RESPONSE:
+
+Final Commit Message:
+
+Completed 2D graphics editor with add, delete, modify and shape drawing features
+
+---
+
+PROMPT 10:
+prompt.txt must also be uploaded.
+
+RESPONSE:
+
+Create prompt.txt and add prompts and responses used during development.
+
+Commit Message:
+
+Added prompt history for GenAI interactions
 
